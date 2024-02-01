@@ -1,0 +1,60 @@
+--comments
+--display all the records of employee table
+--to execute query shortcut key -- ctrl+E
+SELECT EMP_LNAME,EMP_FNAME
+from Employee
+--display all the columns of employee
+SELECT *
+FROM Employee
+--display all the column and info of customer
+SELECT *
+FROM CUSTOMER
+--display customer first name and contact
+SELECT CUS_FNAME,CUS_PHONE
+FROM CUSTOMER
+--column alias --giving another name to column
+SELECT CUS_FNAME As CustomerName,CUS_PHONE As Contact
+FROM CUSTOMER
+--computed column
+SELECT P_DESCRIPT,P_QOH,P_PRICE,P_DISCOUNT,(P_PRICE - (P_PRICE*P_DISCOUNT)) As FinalPrice
+FROM PRODUCT
+--arrangement -- ascending --ASC
+SELECT EMP_LNAME,EMP_FNAME
+from Employee
+ORDER BY EMP_LNAME ASC -- asc is default 
+--descending - DESC
+SELECT EMP_LNAME,EMP_FNAME
+from Employee
+ORDER BY EMP_LNAME DESC
+--display product details from product table 
+--arrange records in descing order based on product price
+SELECT P_DESCRIPT,P_PRICE
+FROM PRODUCT
+ORDER BY P_PRICE DESC
+--conditionals
+--display products with qoh less than 10
+SELECT P_DESCRIPT,P_PRICE,P_QOH
+FROM PRODUCT
+WHERE P_QOH<10
+--display invoices dated on 2028-01-16
+SELECT *
+FROM INVOICE
+WHERE INV_DATE='2018-01-16'
+--display employees whose DOB is after 1970 and years employed
+--is greater than 5
+SELECT *
+FROM Employee
+WHERE EMP_DOB>'1970' and EMP_YEARS>5
+--display vendor info whose are code is either 901 or 904
+SELECT *
+FROM VENDOR
+WHERE V_AREACODE = 901 OR V_AREACODE = 904
+--DISTINCT --to display unique from a column
+--only one occurence of each element will be displayed
+--display all the vendor area code 
+SELECT DISTINCT V_AREACODE
+FROM VENDOR
+
+
+
+
