@@ -1,0 +1,77 @@
+--special operators
+--between--display records within a specific range
+--display product details with product price within 50 to 100
+SELECT *
+FROM PRODUCT
+WHERE P_Price>=50 AND P_price<=100
+--above query can be written using between operator as follows...
+SELECT *
+FROM PRODUCT
+WHERE P_Price BETWEEN 50 AND 100
+
+--IN operator - display records that matches specific value
+--display products with the price 109.99,14.99 and 17.49
+SELECT *
+FROM PRODUCT
+WHERE P_PRICE=109.99 OR P_PRICE=14.99 OR P_PRICE=17.49
+--above query can be written using IN operator as follows...
+SELECT *
+FROM PRODUCT
+WHERE P_PRICE IN (109.99,14.99,17.49)
+
+--LIKE operator --display records that matches a pattern
+--% is used to match any trailing literals
+--display vendor detils starting with the name 'Smith'
+SELECT *
+FROM Vendor
+WHERE V_Contact LIKE 'Smith%'
+--display vendor deatils starting with the alphabet 'S'
+SELECT *
+FROM Vendor
+WHERE V_Contact LIKE 'S%'
+
+--display vendor details whose area code starts with '90'
+--use _ if exactly the search should follow specific number of literals
+SELECT *
+FROM Vendor
+WHERE V_Areacode LIKE '90_'
+
+--AGGREGATE FUNCTIONS
+--AVG
+--display the average price of all products
+SELECT AVG(P_PRICE) As AveragePrice
+FROM PRODUCT
+
+--MAX
+--display the highest priced product
+SELECT MAX(P_PRICE) As HighestPrice
+FROM PRODUCT
+
+--MAX
+--display the lowest priced product
+SELECT MIN(P_PRICE) As LowestPrice
+FROM PRODUCT
+
+--SUM
+--display the total value of all the products
+SELECT SUM(P_PRICE) As TotalValueOfAllProducts
+FROM PRODUCT
+
+--COUNT
+--display the number of products in the produc table
+SELECT COUNT(P_CODE) As NumberofProducts
+FROM PRODUCT
+
+--try
+--display the total amount owed by the customer
+SELECT SUM(CUS_BALANCE) As AmountOwedByCustomers
+FROM Customer
+
+--display the number of products that are prices below 10
+SELECT COUNT(P_CODE) As NumberofProductsBelowRM10
+FROM PRODUCT
+WHERE P_PRICE<10
+
+--display the current inventory(stock) value
+SELECT Sum(P_QOH * P_PRICE) As CurrentInventoryValue
+FROM Product

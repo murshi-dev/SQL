@@ -1,0 +1,64 @@
+--join -- retrieve records from more than one table
+--display records from product and vendor table
+Select P_Code,P_Descript,P_Price,Vendor.V_Code,V_name --Use Vendor.V_Code 
+--to avoid confusion of v_code from product or vendor table
+From Product,Vendor
+Where Product.V_CODE = Vendor.V_CODE
+
+--rewriting the above query using JOIN as follows...
+--default join is Inner Join
+--no null values included in the result
+Select P_Code,P_Descript,P_Price,Vendor.V_Code,V_name
+From Product INNER JOIN Vendor
+On Product.V_CODE = Vendor.V_CODE
+
+--left outer join
+--has null values
+Select P_Code,P_Descript,P_Price,Vendor.V_Code,V_name
+From Product LEFT OUTER JOIN Vendor
+On Product.V_CODE = Vendor.V_CODE
+
+--right outer join
+--has null values
+Select P_Code,P_Descript,P_Price,Vendor.V_Code,V_name
+From Product RIGHT OUTER JOIN Vendor
+On Product.V_CODE = Vendor.V_CODE
+
+--full outer join
+--has null values
+Select P_Code,P_Descript,P_Price,Vendor.V_Code,V_name
+From Product FULL OUTER JOIN Vendor
+On Product.V_CODE = Vendor.V_CODE
+
+--display the customer name, contact and related invoice number and date
+SELECT CUS_LNAME,CUS_FNAME,CUS_PHONE,INV_NUMBER,INV_DATE
+FROM CUSTOMER C INNER JOIN INVOICE I -- ALIAS NAMES FOR TABLES
+ON C.CUS_CODE=I.CUS_CODE
+
+--display the customer name, contact and related invoice number
+--dated 2018-01-16
+SELECT CUS_LNAME,CUS_FNAME,CUS_PHONE,INV_NUMBER,INV_DATE
+FROM CUSTOMER C INNER JOIN INVOICE I -- ALIAS NAMES FOR TABLES
+ON C.CUS_CODE=I.CUS_CODE
+WHERE INV_DATE='2018-01-16'
+
+--display the customers who have not generated any invoice yet
+--hint - use customer and invoice table
+SELECT CUS_LNAME,CUS_FNAME,CUS_PHONE,INV_NUMBER
+FROM CUSTOMER C LEFT OUTER JOIN INVOICE I
+ON C.CUS_CODE=I.CUS_CODE
+WHERE INV_NUMBER IS NULL
+
+--use fact database
+--Write a query to display the book name and date where the 
+--due date is greater than '2017-05-26'.
+SELECT BOOK_TITLE, CHECK_DUE_DATE
+FROM BOOK B INNER JOIN CHECKOUT C
+ON B.BOOK_NUM=C.BOOK_NUM
+WHERE CHECK_DUE_DATE>='2017-05-26'
+
+--Write a query to display the author details and the
+--book number written by him/her.
+SELECT AU_FNAME,AU_LNAME,AU_BIRTHYEAR,BOOK_NUM
+FROM AUTHOR A JOIN WRITES W
+ON A.AU_ID=W.AU_ID
